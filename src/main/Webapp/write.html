@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>写游记</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    
+    <link href="http://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css" rel="stylesheet" type="text/css"/>
+
+
+
+<link href="http://css.mafengwo.net/css/cv/css+mfweditor+mfweditor:css+post+addpost:css+jquery-ui-1.9.1.custom.min^ZFQ^1545789675.css" rel="stylesheet" type="text/css"/>
+
+    <script type="application/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="application/javascript" src="js/bootstrap.js"></script>
+    <script type="application/javascript" src="layui/layui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     <script src="js/vue.js"></script>
+	<style type="text/css">
+		.dhl {
+    		margin-top: 20px;
+    	}
+    	span {
+    		margin-left: 30px;
+    	}
+    	 a:hover {
+            background-color:greenyellow;
+        }
+        dd {
+        	width: 100px;
+        	height: 35px;
+        }
+	</style>
+	</head>
+	<body>
+	
+		<div class="container">
+			<!--顶部导航栏-->
+    <div class="row" style="margin-top: 10px;">
+
+        <div class="col-lg-2" >
+            <img style="width: 120px; height: 60px;" src="images/1550844969(1).jpg"/>
+        </div>
+        <div class="col-lg-5" style="float: left; font-size: large" >
+        		
+          <div class="dhl">
+          
+          	<span><a>首页</a></span><span><a>目的地</a></span><span><a>旅游攻略</a></span><span><a>结伴</a></span><span><a>APP</a></span>
+          </div> 
+        </div>
+        <div class="col-lg-2">
+        	
+                   <div class="input-group" style="margin-top: 17px;">
+			      <input type="text" class="form-control" placeholder="Search for...">
+			     <span class="input-group-btn">
+			        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+			      </span>
+			    </div><!-- /input-group -->
+        </div>
+       <!--<div class="col-lg-1" style="float: right;">
+       	<span><button type="button" class="btn btn-warning">今日打卡</button></span>
+       </div>-->
+        <div class="col-lg-3" style="float: right; font-size: large;width: 220px;" >
+        	
+        		<ul class="layui-nav layui-bg-green" lay-filter="">
+        			
+				  <li class="layui-nav-item"><a href="">消息</a></li>
+				  <li class="layui-nav-item">
+				    <a href="javascript:;">头像</a>
+				    <dl class="layui-nav-child"> <!-- 二级菜单 -->
+				      <dd><a href="">个人中心</a></dd>
+				      <dd><a href="">写游记</a></dd>
+				      <dd><a href="">设置</a></dd>
+				      <dd><a href="">退出</a></dd>
+				    </dl>
+				  </li>
+				</ul>
+        	
+        </div>
+    </div>
+    
+    <div class="row">
+    	<div class="col-lg-12">
+    		<div class="ap-head" style="margin-left: 108px;">
+		        <h1>发表新话题/文章</h1>
+		        <dl d-data="1" class="on">
+		            <dt>游记</dt>
+		            <!--<dd>关联至具体的旅行目的地</dd>-->
+		        </dl>
+		 
+		        <div class="clearfix"></div>
+    		</div>
+    	</div>
+    </div>
+    
+    <div class="row" style="margin-top: 30px;">
+    	<div class="col-lg-12">
+    		<form class="layui-form" enctype='multipart/form-data' method="post">
+    			 
+
+			  <div class="layui-form-item">
+			   <!-- <label class="layui-form-label">输入框</label>-->
+			    <div class="layui-input-block">
+			      <input type="text" name="title" required  lay-verify="required" placeholder="请在这里输入标题" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  
+			   <div class="layui-form-item  ">
+			   	
+			   	<div class="layui-input-block" >
+			   		<label>
+			   			<button class="layui-btn">
+						  <i class="layui-icon">&#xe608;</i> 添加照片
+						</button>
+			   		</label>
+			        <input type="file" value="选择图片" name="image[]" multiple>
+			   	</div>
+			    </div>
+			  
+			  <div class="layui-form-item layui-form-text">
+			    <!--<label class="layui-form-label">文本域</label>-->
+			    <div class="layui-input-block">
+			      <textarea name="desc" placeholder="请输入内容" class="layui-textarea" style="height: 600px;width: 700px;"></textarea>
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <div class="layui-input-block">
+			      <button class="layui-btn" lay-submit lay-filter="formDemo">发表</button>
+			    </div>
+			  </div>
+			</form>
+    	</div>
+    	
+    </div>
+    
+        
+
+    
+		</div>
+<div class="container-fluid">
+
+<!--底栏-->
+	<div class="row" style="background: gray;margin-top: 40px;">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8" >
+			<p style="color: white;">
+				© 2019 Mafengwo.cn 京ICP备11015476号 京公网安备11010502013401号 京ICP证110318号违法和不良信息举报电话: 010-59222790 举报邮箱 mfwyouji@mafengwo.com
+
+网络出版服务许可证：(总)网出证(京)字第161号增值电信业务经营许可证：京B2-20180228 营业执照帮助中心马蜂窝客服：国内4006-345-678海外 +86-10-5922-2799
+			</p>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</div>		
+		
+		
+		<script>
+			layui.use('element', function(){
+			  var element = layui.element;
+			  
+			  //…
+			});
+		</script>
+	</body>
+</html>
+
+
+

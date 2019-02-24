@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Utravel</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="application/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="application/javascript" src="js/bootstrap.js"></script>
+    <script type="application/javascript" src="layui/layui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     <script src="js/vue.js"></script>
+    <style type="text/css">
+    	.dhl {
+    		margin-top: 20px;
+    	}
+    	span {
+    		margin-left: 30px;
+    	}
+    	 a:hover {
+            background-color:greenyellow;
+        }
+          p {
+			border: 0px solid #ccc;
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+			}
+		li {
+			
+			margin-left: 30px;
+		}	
+			
+    </style>
+</head>
+<body>
+<div class="container" id="showdata" >
+	<!--顶部导航栏-->
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-lg-2" >
+            <img style="width: 120px; height: 60px;" src="images/1550844969(1).jpg"/>
+        </div>
+        <div class="col-lg-8 " style="float: left; font-size: large" >
+        		
+          <div class="dhl">
+          
+          	<span><a>首页</a></span><span><a>目的地</a></span><span><a>旅游攻略</a></span><span><a>结伴</a></span><span><a>APP</a></span>
+          </div> 
+        </div>
+        <div class="col-lg-2" style="float: left; font-size: large" >
+        	<div class="dhl">
+        	<span><a href="#">登录</a></span><span><a href="#">注册</a></span> 
+        	</div>
+        </div>
+    </div>
+    
+    <!--搜索框-->
+	<div class="row" style="margin-top: 10px;">
+		<div class="col-lg-12" >
+			<form class="layui-form" action="">
+  <div class="layui-form-item">
+    
+    <div class="layui-input-block" style="float: right; margin-left: 10px;">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">搜索</button>
+    </div>
+    <div class="layui-input-block" style="float: right;" >
+      <input type="text" name="title" required  lay-verify="required" placeholder="搜目的地/攻略" autocomplete="off" class="layui-input">
+     
+    </div>
+    
+  </div>
+</form>
+		</div>
+	</div>
+    
+	<!--轮播图-->
+	<div class="row" >
+		<div class="col-lg-12">
+			<div class="layui-carousel" id="test1">
+			  <div carousel-item>
+			    <div>
+			    	<div class="imgshow" >
+			    		
+			    		<img style="width: 1280px;height: 540px;" src="images/show4.jpeg" />
+			    		
+			   		</div> 
+			    </div>
+			    <div>
+			    	<div  class="imgshow" >
+			    		<img style="width: 1280px;height: 540px;" src="images/wKgEaVxwFIWAML0lAAnBNtTFcWc23.jpeg" />
+			    		
+			   		</div>
+			    </div>
+			    <div>
+			    	<div  class="imgshow" >
+			    		<img style="width: 1280px;height: 540px;" src="images/wKgEaVxsB0uATeQnAARcFCA00Rc14.jpeg" />
+			    		<div class="img-tip" style="float: left;">古老的非洲大陆</div>
+			   		</div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		
+	</div>
+	
+	
+	<!--中间导航条-->
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-lg-8">
+			<ul class="layui-nav layui-bg-green" lay-filter="" style="align-content: center;">
+			  <li class="layui-nav-item layui-this"><a href="">热门游记</a></li>
+			  <li class="layui-nav-item"><a href="">最新发表</a></li>
+			  
+			</ul>
+		</div>
+		<div class="col-lg-4" style="float: right;margin-top: 8px;">
+			<span style="margin-left: 185px;"><a href="write.html"><img src="images/1551003970(1).jpg" /></a></span>
+			
+		</div>
+	</div>
+	
+	<!--显示列表-->
+	<div class="row" style="margin-top: 20px;" v-for="item in infos"  >
+			<div class="col-lg-1"></div>
+			<div class="col-lg-3" >
+				<!--引用地址需要使用v-bind: 简写形式用 ：代替-->
+				<img style="width: 200px;height: 160px; " :src="item.imgurl" />
+			</div>
+		<div class="col-lg-8">
+			<!--标题行-->
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-lg-12" style="font: '微软雅黑'; font-size:x-large;">
+					<span>{{item.title}}</span>
+				</div>
+			</div>
+			<!--内容概要行-->
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-lg-12" style="font-size: large;">
+					<p>
+						{{item.contents}}
+					</p>
+				</div>
+			</div>
+			<!--相关信息行-->
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-lg-9">
+					<span>{{item.city}},by</span><span>{{item.author}}</span>
+				</div>
+			 
+				<div class="col-lg-3" >
+					<p >
+						<span>
+							{{item.clicknumber}}
+						</span>
+							<i class="layui-icon layui-icon-praise" style="font-size: 25px; color: #1E9FFF;"></i>  
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+		<!--分页-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="dvpage" style="text-align: center"></div>
+        </div>
+    </div>
+
+	
+</div>
+
+<div class="container-fluid">
+
+<!--底栏-->
+	<div class="row" style="background: gray;margin-top: 40px;">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8" >
+			<p style="color: white;">
+				© 2019 Mafengwo.cn 京ICP备11015476号 京公网安备11010502013401号 京ICP证110318号违法和不良信息举报电话: 010-59222790 举报邮箱 mfwyouji@mafengwo.com
+
+网络出版服务许可证：(总)网出证(京)字第161号增值电信业务经营许可证：京B2-20180228 营业执照帮助中心马蜂窝客服：国内4006-345-678海外 +86-10-5922-2799
+			</p>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</div>
+<script>
+layui.use(['carousel','form','element','laypage'], function(){
+  var carousel = layui.carousel;
+  var form = layui.form;
+   var element = layui.element;
+   var laypage = layui.laypage;
+  //建造实例
+  //轮播图
+  carousel.render({
+    elem: '#test1'
+    ,width: '100%' //设置容器宽度
+	,height: '450px'
+    ,arrow: 'always' //始终显示箭头
+    //,anim: 'updown' //切换动画方式
+  });
+   laypage.render({
+    elem: 'dvpage', //注意，这里的 test1 是 ID，不用加 # 号
+    count: 6, //数据总数，从服务端得到
+    limit:5
+  });
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    layer.msg(JSON.stringify(data.field));
+    return false;
+  })
+ 
+});
+  
+
+</script>
+
+<script >
+	
+	
+	 var vm = new Vue({
+            el: '#showdata',//el后面绑定元素块的#id
+            data: {
+                infos: [{
+                   id:1,
+					imgurl:'images/wKgEaVxsB0uATeQnAARcFCA00Rc14.jpeg',
+					title:'时光匆匆我们只是路过',
+					contents:'辛苦了一年，我们全家打算奖励自己一次旅行，年前我们的目标有几个，最终还是选择了 东南亚 热带岛屿，沙滩海岛各类海鲜谁能抗拒得了呢，最终落定在 菲律宾 长滩岛 ，这个拥有世上最美日落的岛屿，事后证明，我们的选择是正确的。我们定的是马蜂窝的机票酒店打包的套餐，性价比相对来说要高一点，另外 菲律宾 大大小小的岛屿多达7100多个，如果把好玩的岛屿都玩到，舟车劳顿不符合我们度假放松的初心，所以当你选择一次旅行，一定不要忘记自己是想要得到什么，明白了这个，一切才会明朗，话不多说，进入正题。我们从 上海 虹桥直飞 菲律宾 卡替克兰机场，喜欢购物的朋友可以提早两个小时去日上免税店各种买买买，这里的护肤品真的比好多地方便宜很多',
+					author:'小芳',
+					city:'中国台北',
+					clicknumber:38
+                }, {
+                   id:1,
+					imgurl:'images/show1.jpeg',
+					title:'时光匆匆我们只是路过',
+					contents:'辛苦了一年，我们全家打算奖励自己一次旅行，年前我们的目标有几个，最终还是选择了 东南亚 热带岛屿，沙滩海岛各类海鲜谁能抗拒得了呢，最终落定在 菲律宾 长滩岛 ，这个拥有世上最美日落的岛屿，事后证明，我们的选择是正确的。我们定的是马蜂窝的机票酒店打包的套餐，性价比相对来说要高一点，另外 菲律宾 大大小小的岛屿多达7100多个，如果把好玩的岛屿都玩到，舟车劳顿不符合我们度假放松的初心，所以当你选择一次旅行，一定不要忘记自己是想要得到什么，明白了这个，一切才会明朗，话不多说，进入正题。我们从 上海 虹桥直飞 菲律宾 卡替克兰机场，喜欢购物的朋友可以提早两个小时去日上免税店各种买买买，这里的护肤品真的比好多地方便宜很多',
+					author:'小芳',
+					city:'中国台北',
+					clicknumber:38,
+                }, {
+                    id:1,
+					imgurl:'images/show4.jpeg',
+					title:'时光匆匆我们只是路过',
+					contents:'辛苦了一年，我们全家打算奖励自己一次旅行，年前我们的目标有几个，最终还是选择了 东南亚 热带岛屿，沙滩海岛各类海鲜谁能抗拒得了呢，最终落定在 菲律宾 长滩岛 ，这个拥有世上最美日落的岛屿，事后证明，我们的选择是正确的。我们定的是马蜂窝的机票酒店打包的套餐，性价比相对来说要高一点，另外 菲律宾 大大小小的岛屿多达7100多个，如果把好玩的岛屿都玩到，舟车劳顿不符合我们度假放松的初心，所以当你选择一次旅行，一定不要忘记自己是想要得到什么，明白了这个，一切才会明朗，话不多说，进入正题。我们从 上海 虹桥直飞 菲律宾 卡替克兰机场，喜欢购物的朋友可以提早两个小时去日上免税店各种买买买，这里的护肤品真的比好多地方便宜很多',
+					author:'小芳',
+					city:'中国台北',
+					clicknumber:38,
+                }, {
+                    id:1,
+					imgurl:'images/show1.jpeg',
+					title:'时光匆匆我们只是路过',
+					contents:'辛苦了一年，我们全家打算奖励自己一次旅行，年前我们的目标有几个，最终还是选择了 东南亚 热带岛屿，沙滩海岛各类海鲜谁能抗拒得了呢，最终落定在 菲律宾 长滩岛 ，这个拥有世上最美日落的岛屿，事后证明，我们的选择是正确的。我们定的是马蜂窝的机票酒店打包的套餐，性价比相对来说要高一点，另外 菲律宾 大大小小的岛屿多达7100多个，如果把好玩的岛屿都玩到，舟车劳顿不符合我们度假放松的初心，所以当你选择一次旅行，一定不要忘记自己是想要得到什么，明白了这个，一切才会明朗，话不多说，进入正题。我们从 上海 虹桥直飞 菲律宾 卡替克兰机场，喜欢购物的朋友可以提早两个小时去日上免税店各种买买买，这里的护肤品真的比好多地方便宜很多',
+					author:'小芳',
+					city:'中国台北',
+					clicknumber:38,
+                }, {
+                    id:1,
+					imgurl:'images/show1.jpeg',
+					title:'时光匆匆我们只是路过',
+					contents:'辛苦了一年，我们全家打算奖励自己一次旅行，年前我们的目标有几个，最终还是选择了 东南亚 热带岛屿，沙滩海岛各类海鲜谁能抗拒得了呢，最终落定在 菲律宾 长滩岛 ，这个拥有世上最美日落的岛屿，事后证明，我们的选择是正确的。我们定的是马蜂窝的机票酒店打包的套餐，性价比相对来说要高一点，另外 菲律宾 大大小小的岛屿多达7100多个，如果把好玩的岛屿都玩到，舟车劳顿不符合我们度假放松的初心，所以当你选择一次旅行，一定不要忘记自己是想要得到什么，明白了这个，一切才会明朗，话不多说，进入正题。我们从 上海 虹桥直飞 菲律宾 卡替克兰机场，喜欢购物的朋友可以提早两个小时去日上免税店各种买买买，这里的护肤品真的比好多地方便宜很多',
+					author:'小芳',
+					city:'中国台北',
+					clicknumber:38,
+                }]
+            }
+        })
+</script>
+
+
+</body>
+</html>
