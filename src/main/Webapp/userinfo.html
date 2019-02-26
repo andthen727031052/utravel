@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的信息</title>
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="layui/css/layui.css"/>
+
+<!--引用样式-->
+		<link href="https://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css" rel="stylesheet" type="text/css"/>
+
+
+
+		<link href="https://css.mafengwo.net/css/other/isettings.css?1535630301" rel="stylesheet" type="text/css"/>
+
+		<script type="application/javascript" src="js/jquery-3.3.1.js"></script>
+		<script type="application/javascript" src="js/bootstrap.js"></script>
+		<script type="application/javascript" src="layui/layui.js"></script>
+		<script src="js/vue.js"></script>
+		<style type="text/css">
+			/*.dhl {
+				margin-top: 20px;
+			}*/
+			/*span {
+				margin-left: 30px;
+			}*/
+
+			a:hover {
+				background-color:greenyellow;
+			}
+			/*dd {
+				width: 120px;
+				height: 35px;
+			}*/
+
+		</style>
+	</head>
+	<body>
+<div class="container">
+	<div class="row" style="margin-top: 10px;">
+
+		<div class="col-lg-2" >
+			<a href="index.html"><img style="width: 120px; height: 60px;" src="images/1550844969(1).jpg"/></a>
+		</div>
+		<div class="col-lg-1" style="margin-top: 15px;font-size: large"><a href="index.html">首页</a></div>
+		<div class="col-lg-1" style="margin-top: 15px;font-size: large"><a>目的地</a></div>
+		<div class="col-lg-1" style="margin-top: 15px;font-size: large"><a>攻略</a></div>
+		<div class="col-lg-1" style="margin-top: 15px;font-size: large"><a>结伴</a></div>
+		<div class="col-lg-1" style="margin-top: 15px;font-size: large"><a></a></div>
+		<!--<div class="col-lg-5" style="float: left; font-size: large" >
+
+			<div class="dhl">
+
+				<span><a>首页</a></span><span><a>目的地</a></span><span><a>旅游攻略</a></span><span><a>结伴</a></span><span><a></a></span>
+			</div>
+		</div>-->
+		<div class="col-lg-2">
+
+			<div class="input-group" style="margin-top: 17px;">
+				<input type="text" class="form-control" placeholder="Search for...">
+				<span class="input-group-btn">
+			        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+			      </span>
+			</div><!-- /input-group -->
+		</div>
+		<!--<div class="col-lg-1" style="float: right;">
+            <span><button type="button" class="btn btn-warning">今日打卡</button></span>
+        </div>-->
+		<div class="col-lg-3" style="float: right; font-size: large;width: 220px;" >
+
+			<ul class="layui-nav layui-bg-green" lay-filter="">
+
+				<li class="layui-nav-item"><a href="">消息</a>
+					<dl class="layui-nav-child"> <!-- 二级菜单 -->
+						<dd><a href="">私信</a></dd>
+						<dd><a href="">小组消息</a></dd>
+						<dd><a href="">系统通知</a></dd>
+						<dd><a href="">问答消息</a></dd>
+						<dd><a href="">回复消息</a></dd>
+						<dd><a href="">好友动态</a></dd>
+					</dl>
+				</li>
+
+				<li class="layui-nav-item">
+					<a href="">我的</a>
+					<dl class="layui-nav-child"> <!-- 二级菜单 -->
+						<dd><a href="">个人中心</a></dd>
+						<dd><a href="">写游记</a></dd>
+						<dd><a href="">设置</a></dd>
+						<dd><a href="">退出</a></dd>
+					</dl>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+
+	<div class="row" style="margin-top: 20px">
+		<div class="col-lg-12">
+
+			<div class="wrapper clearfix">
+				<div class="aside">
+					<a href="/setting/" class="on"><i class="i1"></i>我的信息</a>
+					<a href="/setting/avatar/" ><i class="i2"></i>我的头像</a>
+					<a href="/setting/sns/" ><i class="i3"></i>绑定设置</a>
+					<a href="/setting/security/" ><i class="i4"></i>账号安全</a>
+
+
+
+					<a href="/setting/domain/" ><i class="i8"></i>我的窝设置</a>
+					<a href="/setting/blacklist/" ><i class="i9"></i>黑名单管理</a>
+					<a href="/setting/wallet/" ><i class="i10"></i>我的钱包</a>
+				</div>
+
+				<div class="content">
+					<div class="hd">
+						<strong>我的信息</strong>
+						<span>
+                    资料完善度
+                    <div class="progress">
+                        <div class="num">65%</div>
+                        <div class="on" style="width:65%"></div>
+                    </div>
+                </span>
+					</div>
+
+					<div class="userinfo">
+						<form action="" method="post" id="_j_form">
+							<div class="alert alert-danger" style="color: #a94442;background-color: #f2dede;border-color: #ebccd1;display:none"></div>
+							<dl class="clearfix">
+								<dt style="width: 100px">名号：</dt>
+								<dd><input type="text" name="uname"  maxlength="16" autocomplete="off"
+										   data-verification-name="名号" class="verification[required,funcCall[checkNickname]]" /></dd>
+							</dl>
+							<dl class="clearfix">
+								<dt style="width: 100px">性别：</dt>
+								<dd>
+									<label><span class="cssradio"><input type="radio" name="gender" value="1" /><span></span></span>男</label>
+									<label><span class="cssradio"><input type="radio" name="gender" value="0" /><span></span></span>女</label>
+									<label><span class="cssradio"><input type="radio" name="gender" value="2" /><span></span></span>保密</label>
+								</dd>
+							</dl>
+							<dl class="clearfix">
+								<dt style="width: 100px">居住城市：</dt>
+								<dd>
+									<div class="input-group">
+										<input type="text" name="city" value="" data-city="" autocomplete="off"
+											   data-verification-name="居住城市" />
+									</div>
+								</dd>
+							</dl>
+							<dl class="clearfix">
+								<dt style="width: 100px">出生日期：</dt>
+								<dd>
+									<input type="date"  name="birthday" value=""
+										   data-verification-name="出生日期" class="" autocomplete="off"/>
+								</dd>
+							</dl>
+							<dl class="clearfix">
+								<dt style="width: 100px">个人简介：</dt>
+								<dd><textarea name="intro" data-verification-name="个人简介" placeholder="例：摄影师/旅居澳洲/潜水爱好者" class="verification[maxSize[100]]" maxlength="100"></textarea></dd>
+							</dl>
+
+
+
+							<div class="btn-sub"><button type="submit">保存</button></div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+</div>
+
+<div class="container-fluid">
+
+	<!--底栏-->
+	<div class="row" style="background: gray;margin-top: 160px;">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8" >
+			<p style="color: white;">
+				© 2019 Mafengwo.cn 京ICP备11015476号 京公网安备11010502013401号 京ICP证110318号违法和不良信息举报电话: 010-59222790 举报邮箱 mfwyouji@mafengwo.com
+
+				网络出版服务许可证：(总)网出证(京)字第161号增值电信业务经营许可证：京B2-20180228 营业执照帮助中心马蜂窝客服：国内4006-345-678海外 +86-10-5922-2799
+			</p>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</div>
+
+
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+
+	</body>
+</html>

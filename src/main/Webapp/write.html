@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.springframework.org/schema/mvc">
 	<head>
 		<meta charset="UTF-8">
 		<title>写游记</title>
 	<link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="layui/css/layui.css"/>
-    
-    <link href="http://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css" rel="stylesheet" type="text/css"/>
-
-
 
 <link href="http://css.mafengwo.net/css/cv/css+mfweditor+mfweditor:css+post+addpost:css+jquery-ui-1.9.1.custom.min^ZFQ^1545789675.css" rel="stylesheet" type="text/css"/>
+
 
     <script type="application/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="application/javascript" src="js/bootstrap.js"></script>
     <script type="application/javascript" src="layui/layui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
      <script src="js/vue.js"></script>
 	<style type="text/css">
 		.dhl {
@@ -28,7 +24,7 @@
             background-color:greenyellow;
         }
         dd {
-        	width: 100px;
+        	width: 120px;
         	height: 35px;
         }
 	</style>
@@ -40,13 +36,13 @@
     <div class="row" style="margin-top: 10px;">
 
         <div class="col-lg-2" >
-            <img style="width: 120px; height: 60px;" src="images/1550844969(1).jpg"/>
-        </div>
-        <div class="col-lg-5" style="float: left; font-size: large" >
-        		
-          <div class="dhl">
-          
-          	<span><a>首页</a></span><span><a>目的地</a></span><span><a>旅游攻略</a></span><span><a>结伴</a></span><span><a>APP</a></span>
+			<a href="index.html"><img style="width: 120px; height: 60px;" src="images/1550844969(1).jpg"/></a>
+		</div>
+		<div class="col-lg-5 " style="float: left; font-size: large" >
+
+			<div class="dhl">
+
+				<span><a href="index.html">首页</a></span><span><a>目的地</a></span><span><a>旅游攻略</a></span><span><a>结伴</a></span><span><a>APP</a></span>
           </div> 
         </div>
         <div class="col-lg-2">
@@ -58,16 +54,24 @@
 			      </span>
 			    </div><!-- /input-group -->
         </div>
-       <!--<div class="col-lg-1" style="float: right;">
-       	<span><button type="button" class="btn btn-warning">今日打卡</button></span>
-       </div>-->
+
         <div class="col-lg-3" style="float: right; font-size: large;width: 220px;" >
         	
         		<ul class="layui-nav layui-bg-green" lay-filter="">
         			
-				  <li class="layui-nav-item"><a href="">消息</a></li>
+				  <li class="layui-nav-item"><a href="">消息</a>
+				  	<dl class="layui-nav-child"> <!-- 二级菜单 -->
+				      <dd><a href="">私信</a></dd>
+				      <dd><a href="">小组消息</a></dd>
+				      <dd><a href="">系统通知</a></dd>
+				      <dd><a href="">问答消息</a></dd>
+				      <dd><a href="">回复消息</a></dd>
+				      <dd><a href="">好友动态</a></dd>
+				    </dl>
+				  </li>
+				  	 
 				  <li class="layui-nav-item">
-				    <a href="javascript:;">头像</a>
+				    <a href=";">我的</a>
 				    <dl class="layui-nav-child"> <!-- 二级菜单 -->
 				      <dd><a href="">个人中心</a></dd>
 				      <dd><a href="">写游记</a></dd>
@@ -96,7 +100,7 @@
     
     <div class="row" style="margin-top: 30px;">
     	<div class="col-lg-12">
-    		<form class="layui-form" enctype='multipart/form-data' method="post">
+    		<form class="layui-form" enctype='multipart/form-data' method="post" onsubmit="return false">
     			 
 
 			  <div class="layui-form-item">
@@ -105,19 +109,43 @@
 			      <input type="text" name="title" required  lay-verify="required" placeholder="请在这里输入标题" autocomplete="off" class="layui-input">
 			    </div>
 			  </div>
-			  
-			   <div class="layui-form-item  ">
-			   	
+
+				<div class="layui-form-item">
+					<!-- <label class="layui-form-label">输入框</label>-->
+					<div class="layui-input-block">
+						<input type="text" name="place" required  lay-verify="required" placeholder="目的地" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+
+			   <!--<div class="layui-form-item  ">
+
+
 			   	<div class="layui-input-block" >
 			   		<label>
 			   			<button class="layui-btn">
 						  <i class="layui-icon">&#xe608;</i> 添加照片
 						</button>
 			   		</label>
-			        <input type="file" value="选择图片" name="image[]" multiple>
+			        <input type="file" value="选择图片" name="imgs" multiple>
 			   	</div>
-			    </div>
-			  
+			    </div>-->
+
+				<div class="layui-form-item">
+					<!--<label class="layui-form-label">添加照片</label>-->
+					<div class="layui-input-inline uploadHeadImage">
+						<div class="layui-upload-drag" id="headImg">
+							<i class="layui-icon"></i>
+							<p>点击上传图片，或将图片拖拽到此处</p>
+						</div>
+					</div>
+					<div class="layui-input-inline">
+						<div class="layui-upload-list">
+							<img class="layui-upload-img headImage" src="http://t.cn/RCzsdCq" id="demo1">
+							<p id="demoText"></p>
+						</div>
+					</div>
+				</div>
+
 			  <div class="layui-form-item layui-form-text">
 			    <!--<label class="layui-form-label">文本域</label>-->
 			    <div class="layui-input-block">
@@ -126,7 +154,7 @@
 			  </div>
 			  <div class="layui-form-item">
 			    <div class="layui-input-block">
-			      <button class="layui-btn" lay-submit lay-filter="formDemo">发表</button>
+			      <button class="layui-btn" lay-submit lay-filter="formDemo" id="addArt" onclick="saveArt()">发表</button>
 			    </div>
 			  </div>
 			</form>
@@ -152,16 +180,53 @@
 		</div>
 		<div class="col-lg-2"></div>
 	</div>
-</div>		
-		
-		
-		<script>
-			layui.use('element', function(){
-			  var element = layui.element;
-			  
-			  //…
-			});
+</div>
+
+
+
+		<script type="text/javascript">
+            layui.use(["jquery", "upload", "form", "layer", "element"], function () {
+                var $ = layui.$,
+                    element = layui.element,
+                    layer = layui.layer,
+                    upload = layui.upload,
+                    form = layui.form;
+                //拖拽上传
+                var uploadInst = upload.render({
+                    elem: '#headImg'
+                    , url: '/addImg.do'
+                    , size: 5000
+                    , before: function (obj) {
+                        //预读本地文件示例，不支持ie8
+                        obj.preview(function (index, file, result) {
+                            $('#demo1').attr('src', result); //图片链接（base64）
+                        });
+                    }
+                    , done: function (res) {
+                        //如果上传失败
+                        if (res.code == 0) {
+                            return layer.msg('上传失败');
+                        }
+                        //上传成功
+                        //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台, 此处略..
+                        /*   console.log(res.data.src);*/
+                        window.parent.uploadHeadImage(res.data.src);
+                        var demoText = $('#demoText');
+                        demoText.html('<span style="color: #8f8f8f;">上传成功!!!</span>');
+                    }
+                    , error: function () {
+                        //演示失败状态，并实现重传
+                        var demoText = $('#demoText');
+                        demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                        demoText.find('.demo-reload').on('click', function () {
+                            uploadInst.upload();
+                        });
+                    }
+                });
+                element.init();
+            });
 		</script>
+
 	</body>
 </html>
 

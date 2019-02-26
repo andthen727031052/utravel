@@ -8,7 +8,6 @@
     <script type="application/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="application/javascript" src="js/bootstrap.js"></script>
     <script type="application/javascript" src="layui/layui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
      <script src="js/vue.js"></script>
     <style type="text/css">
     	.dhl {
@@ -27,11 +26,12 @@
 			-webkit-line-clamp: 3;
 			-webkit-box-orient: vertical;
 			}
-		li {
-			
-			margin-left: 30px;
-		}	
-			
+
+
+		dd {
+			width: 120px;
+			height: 35px;
+		}
     </style>
 </head>
 <body>
@@ -39,19 +39,41 @@
 	<!--顶部导航栏-->
     <div class="row" style="margin-top: 10px;">
         <div class="col-lg-2" >
-            <img style="width: 120px; height: 60px;" src="images/1550844969(1).jpg"/>
+            <a href="index.html"><img style="width: 120px; height: 60px;" src="images/1550844969(1).jpg"/></a>
         </div>
-        <div class="col-lg-8 " style="float: left; font-size: large" >
+        <div class="col-lg-5 " style="float: left; font-size: large" >
         		
           <div class="dhl">
           
-          	<span><a>首页</a></span><span><a>目的地</a></span><span><a>旅游攻略</a></span><span><a>结伴</a></span><span><a>APP</a></span>
+          	<span><a href="index.html">首页</a></span><span><a>目的地</a></span><span><a>旅游攻略</a></span><span><a>结伴</a></span><span><a>APP</a></span>
           </div> 
         </div>
-        <div class="col-lg-2" style="float: left; font-size: large" >
-        	<div class="dhl">
-        	<span><a href="#">登录</a></span><span><a href="#">注册</a></span> 
-        	</div>
+		<div class="col-lg-2"></div>
+        <div class="col-lg-3" style="float: right; font-size: large;width: 220px;" id="userStatus">
+				<ul class="layui-nav layui-bg-green" lay-filter="">
+
+					<li class="layui-nav-item"><a href="#">消息</a>
+						<dl class="layui-nav-child"> <!-- 二级菜单 -->
+							<dd><a href="">私信</a></dd>
+							<dd><a href="">小组消息</a></dd>
+							<dd><a href="">系统通知</a></dd>
+							<dd><a href="">问答消息</a></dd>
+							<dd><a href="">回复消息</a></dd>
+							<dd><a href="">好友动态</a></dd>
+						</dl>
+					</li>
+
+					<li class="layui-nav-item">
+						<a href="#">我的</a>
+						<dl class="layui-nav-child"> <!-- 二级菜单 -->
+							<dd><a href="">个人中心</a></dd>
+							<dd><a href="">写游记</a></dd>
+							<dd><a href="">设置</a></dd>
+							<dd><a href="">退出</a></dd>
+						</dl>
+					</li>
+				</ul>
+        	<!--<span ><a href="login.html">登录</a></span><span><a href="register.html">注册</a></span>-->
         </div>
     </div>
     
@@ -109,8 +131,8 @@
 	<div class="row" style="margin-top: 20px;">
 		<div class="col-lg-8">
 			<ul class="layui-nav layui-bg-green" lay-filter="" style="align-content: center;">
-			  <li class="layui-nav-item layui-this"><a href="">热门游记</a></li>
-			  <li class="layui-nav-item"><a href="">最新发表</a></li>
+			  <li class="layui-nav-item layui-this"><a href="" style="margin-left: 30px">热门游记</a></li>
+			  <li class="layui-nav-item" style="margin-left: 30px"><a href="">最新发表</a></li>
 			  
 			</ul>
 		</div>
@@ -217,6 +239,43 @@ layui.use(['carousel','form','element','laypage'], function(){
 
 </script>
 
+<script type="text/javascript">
+	$(function () {
+		$.ajax({
+			url:"/utravel/user/getUser.do",
+			type:"get",
+			dataType:"json",
+			success:function (data) {
+				if (data.code==1) {
+				    if (data.info==null){
+				        $("#userStatus").html('<span ><a href="login.html">登录</a></span><span><a href="register.html">注册</a></span>');
+					}
+				}else{
+				    alert(data.info);
+				}
+            }
+		})
+    })
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script >
 	
 	
@@ -268,6 +327,12 @@ layui.use(['carousel','form','element','laypage'], function(){
         })
 </script>
 
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
 
+        //…
+    });
+</script>
 </body>
 </html>

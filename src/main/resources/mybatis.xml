@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+<!-- mybatis中的配置设置是有顺序要求的  -->
+<!-- 参数设置 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	    <!-- 启用懒加载，必须按照下面方式配置 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<!-- 将积极加载改为消极加载即按需加载。必须写,且为false才会懒加载 -->  
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<!-- 开启二级缓存 -->
+		<setting name="cacheEnabled" value="true"/>
+	</settings>
+	
+<!-- 定义别名
+	type是需要定义的类 包名+类名的形式
+	alias 别名
+ -->
+	<typeAliases>
+		<typeAlias  type="com.utravel.domain.User" alias="user"/>
+
+	</typeAliases>
+
+	<plugins>
+		<!-- com.github.pagehelper为PageHelper类所在包名 -->
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<!-- 使用下面的方式配置参数，后面会有所有的参数介绍 -->
+			<!-- 设置数据库的方言 支持哪种数据库 -->
+			<property name="helperDialect" value="mysql" />
+		</plugin>
+	</plugins>
+
+</configuration>

@@ -8,10 +8,10 @@
     <script type="application/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="application/javascript" src="js/bootstrap.js"></script>
     <script type="application/javascript" src="layui/layui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
      <script src="js/vue.js"></script>
+
 	</head>
-	<body background="images/2.jpg">
+	<body background="images/2.jpg" style="background-repeat:no-repeat">
 		<div class="container">
 			<div class="row" style="margin-top: 300px;">
 				<div class="col-lg-4"></div>
@@ -20,7 +20,7 @@
   <div class="layui-form-item">
     <label class="layui-form-label">用户名</label>
     <div class="layui-input-block" style="margin-left: 80px;">
-      <input type="text" name="title" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+      <input type="text" name="uname" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
     </div>
   </div>
   <div class="layui-form-item">
@@ -31,7 +31,7 @@
   </div>
 
   <div class="layui-form-item" style="margin-left: 80px;">
-      <button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+      <button class="layui-btn" lay-submit lay-filter="formDemo" >登录</button>
       
       <button class="layui-btn" ><a href="register.html">还没账号？马上注册</a></button>
   </div>
@@ -49,10 +49,26 @@
 			  
 			  //监听提交
 			  form.on('submit(formDemo)', function(data){
-			    layer.msg(JSON.stringify(data.field));
+			    //layer.msg(JSON.stringify(data.field));
+                  var datas = data.field;
+			    $.ajax({
+                    url:"/utravel/user/login.do",
+                    data:datas,
+                    type:"post",
+                    dataType:"json",
+                    success:function (msg) {
+                        if (msg.code==1){
+                            window.location.href = "index.html";
+                        } else {
+                            layer.msg(msg.info);
+                        }
+                    }
+                })
 			    return false;
 			  });
 			});
+
+
 		</script>
 	</body>
 </html>

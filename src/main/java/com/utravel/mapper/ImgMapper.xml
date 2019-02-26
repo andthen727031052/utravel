@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.utravel.dao.ImgMapper">
+  <resultMap id="BaseResultMap" type="com.utravel.domain.Img">
+    <id column="imgid" jdbcType="INTEGER" property="imgid" />
+    <result column="imgurl" jdbcType="VARCHAR" property="imgurl" />
+    <result column="tname" jdbcType="VARCHAR" property="tname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    imgid, imgurl, tname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_img
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_img
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.utravel.domain.Img">
+    insert into t_img (imgid, imgurl, tname
+      )
+    values (#{imgid,jdbcType=INTEGER}, #{imgurl,jdbcType=VARCHAR}, #{tname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.utravel.domain.Img">
+    insert into t_img
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imgid != null">
+        imgid,
+      </if>
+      <if test="imgurl != null">
+        imgurl,
+      </if>
+      <if test="tname != null">
+        tname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imgid != null">
+        #{imgid,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null">
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null">
+        #{tname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.utravel.domain.Img">
+    update t_img
+    <set>
+      <if test="imgurl != null">
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null">
+        tname = #{tname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.utravel.domain.Img">
+    update t_img
+    set imgurl = #{imgurl,jdbcType=VARCHAR},
+      tname = #{tname,jdbcType=VARCHAR}
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </update>
+</mapper>
