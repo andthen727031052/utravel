@@ -11,6 +11,8 @@ public interface ImgMapper {
 
     Img selectByPrimaryKey(Integer imgid);
 
+    Img selectByTitle(String title);
+
     int updateByPrimaryKeySelective(Img record);
 
     int updateByPrimaryKey(Img record);

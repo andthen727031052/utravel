@@ -86,7 +86,8 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 上传文件的最大大小 ，单位字节 ，比如 1024 * 1024 = 1M-->
         <property name="maxUploadSize" value="10485760"></property>
-
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="resolveLazily" value="true"/>
     </bean>
 
 

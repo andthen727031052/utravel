@@ -21,6 +21,7 @@
  -->
 	<typeAliases>
 		<typeAlias  type="com.utravel.domain.User" alias="user"/>
+		<typeAlias  type="com.utravel.domain.Img" alias="img"/>
 
 	</typeAliases>
 

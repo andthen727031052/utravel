@@ -147,7 +147,7 @@
 			<div class="col-lg-1"></div>
 			<div class="col-lg-3" >
 				<!--引用地址需要使用v-bind: 简写形式用 ：代替-->
-				<img style="width: 200px;height: 160px; " :src="item.imgurl" />
+				<img style="width: 200px;height: 160px; " :src="ut/" + {{item.imgurl}} />
 			</div>
 		<div class="col-lg-8">
 			<!--标题行-->
@@ -167,7 +167,7 @@
 			<!--相关信息行-->
 			<div class="row" style="margin-top: 10px;">
 				<div class="col-lg-9">
-					<span>{{item.city}},by</span><span>{{item.author}}</span>
+					<span>{{item.place}},by</span><span>{{item.uname}}</span>
 				</div>
 			 
 				<div class="col-lg-3" >
@@ -224,10 +224,30 @@ layui.use(['carousel','form','element','laypage'], function(){
     //,anim: 'updown' //切换动画方式
   });
    laypage.render({
+	   $.ajax({
+	   url:"/artList.do",
+
+   })
     elem: 'dvpage', //注意，这里的 test1 是 ID，不用加 # 号
     count: 6, //数据总数，从服务端得到
-    limit:5
+    limit:5,
+    jump: function(obj, first){
+           //obj包含了当前分页的所有参数，比如：
+           console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+           console.log(obj.limit); //得到每页显示的条数
+
+           //首次不执行
+           if(!first){
+               //do something
+           }
+       }
+
+
   });
+
+
+
+
   //监听提交
   form.on('submit(formDemo)', function(data){
     layer.msg(JSON.stringify(data.field));
@@ -236,28 +256,27 @@ layui.use(['carousel','form','element','laypage'], function(){
  
 });
   
+function getList(page,info){
+    $.ajax({
+		type:"get",
+		url:"/artList.do?page="+page+"&info="+info,
+		dataType:"json",
+		success:function (res) {
+			if (res.code==1){
+			    var vm = new Vue({
+                    el: '#showdata',//el后面绑定元素块的#id
+                    data: {
+                        infos:res.info.rows
+                    }
+				})
+			}
+        }
+	})
+}
 
 </script>
 
-<script type="text/javascript">
-	$(function () {
-		$.ajax({
-			url:"/utravel/user/getUser.do",
-			type:"get",
-			dataType:"json",
-			success:function (data) {
-				if (data.code==1) {
-				    if (data.info==null){
-				        $("#userStatus").html('<span ><a href="login.html">登录</a></span><span><a href="register.html">注册</a></span>');
-					}
-				}else{
-				    alert(data.info);
-				}
-            }
-		})
-    })
 
-</script>
 
 
 
@@ -333,6 +352,26 @@ layui.use(['carousel','form','element','laypage'], function(){
 
         //…
     });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            url:"/utravel/user/getUser.do",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                if (data.code==1) {
+                    if (data.info==null){
+                        $("#userStatus").html('<span ><a href="login.html">登录</a></span><span><a href="register.html">注册</a></span>');
+                    }
+                }else{
+                    alert(data.info);
+                }
+            }
+        })
+    })
+
 </script>
 </body>
 </html>

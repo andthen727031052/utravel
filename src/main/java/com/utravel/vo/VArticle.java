@@ -7,6 +7,8 @@ import java.util.List;
 public class VArticle {
     private Integer aid;
 
+    private String uname;
+
     private String title;
 
     private String deploytime;
@@ -18,6 +20,14 @@ public class VArticle {
     private Integer clicknumber;
 
     private List<Img> imgList;
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
 
     public Integer getAid() {
         return aid;

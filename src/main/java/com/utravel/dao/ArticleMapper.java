@@ -2,6 +2,9 @@ package com.utravel.dao;
 
 import com.utravel.domain.Article;
 import com.utravel.domain.Article;
+import com.utravel.vo.VArticle;
+
+import java.util.List;
 
 public interface ArticleMapper {
     int deleteByPrimaryKey(Integer aid);
@@ -11,6 +14,8 @@ public interface ArticleMapper {
     int insertSelective(Article record);
 
     Article selectByPrimaryKey(Integer aid);
+
+    List<VArticle> selectAllByInfo(String info);
 
     int updateByPrimaryKeySelective(Article record);
 

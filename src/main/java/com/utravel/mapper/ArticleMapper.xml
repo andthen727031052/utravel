@@ -10,6 +10,25 @@
     <result column="contents" jdbcType="VARCHAR" property="contents" />
     <result column="clicknumber" jdbcType="INTEGER" property="clicknumber" />
   </resultMap>
+
+  <resultMap id="vart" type="com.utravel.vo.VArticle">
+    <id column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="deploytime" jdbcType="VARCHAR" property="deploytime" />
+    <result column="contents" jdbcType="VARCHAR" property="contents" />
+    <result column="clicknumber" jdbcType="INTEGER" property="clicknumber" />
+    <collection  property="imgList"
+                 ofType="img"
+                 column="tname"> <!--column是img的参数-->
+    <id column="imgid" jdbcType="INTEGER" property="imgid" />
+    <result column="imgurl" jdbcType="VARCHAR" property="imgurl" />
+    <result column="tname" jdbcType="VARCHAR" property="tname" />
+
+    </collection>
+  </resultMap>
+
   <sql id="Base_Column_List">
     aid, uid, title, place, deploytime, contents, clicknumber
   </sql>
@@ -19,6 +38,16 @@
     from t_article
     where aid = #{aid,jdbcType=INTEGER}
   </select>
+
+  <select id="selectAllByInfo" parameterType="string" resultMap="vart">
+    select a.aid,u.uname,a.title,a.place,a.deploytime,a.contents,a.clicknumber,i.* from t_article a
+    LEFT JOIN t_img i
+    on i.tname = a.title
+    INNER JOIN t_user u
+    on u.uid = a.uid
+    where title like "%"#{info}"%" or place like "%"#{info}"%" or contents like "%"#{info}"%"
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_article
     where aid = #{aid,jdbcType=INTEGER}
