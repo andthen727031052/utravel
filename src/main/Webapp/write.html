@@ -73,10 +73,10 @@
 				  <li class="layui-nav-item">
 				    <a href=";">我的</a>
 				    <dl class="layui-nav-child"> <!-- 二级菜单 -->
-				      <dd><a href="">个人中心</a></dd>
-				      <dd><a href="">写游记</a></dd>
-				      <dd><a href="">设置</a></dd>
-				      <dd><a href="">退出</a></dd>
+						<dd><a href="userinfo.html">个人中心</a></dd>
+						<dd><a href="write.html">写游记</a></dd>
+						<dd><a href="userinfo.html">设置</a></dd>
+						<dd><a href="login.html">退出</a></dd>
 				    </dl>
 				  </li>
 				</ul>
@@ -155,7 +155,7 @@
 			  <div class="layui-form-item layui-form-text">
 			    <!--<label class="layui-form-label">文本域</label>-->
 			    <div class="layui-input-block">
-			      <textarea name="contents" placeholder="请输入内容" class="layui-textarea" style="height: 600px;width: 700px;"></textarea>
+			      <textarea name="contents" placeholder="请输入内容" class="layui-textarea" id="contents" style="height: 600px;width: 700px;"></textarea>
 			    </div>
 			  </div>
 			  <div class="layui-form-item">
@@ -194,11 +194,11 @@
 			$(function () {
 				$.ajax({
 					type:"get",
-					url:"/utravel/getUser.do",
+					url:"/utravel/user/getUser.do",
 					dataType:"json",
 					success:function(data){
 					    if (data.code!=1){
-					      layer.msg("未登录");
+					      layer.msg("请登录后再来分享");
 						}
 					}
 				})
@@ -209,11 +209,15 @@
 
 		<script>
 			var layer;
-            layui.use(["jquery", "upload", "form", "layer", "element"], function(){
+			var layedit;
+            layui.use(["jquery", "upload", "form", "layer", "element","layedit"], function(){
                 var upload = layui.upload,
                 	$ = layui.$,
                     element = layui.element,
-                    layer = layui.layer,
+                    form = layui.form;
+                    layedit = layui.layedit;
+                    layer = layui.layer;
+
 
                     form = layui.form;
                 //执行实例
@@ -223,10 +227,10 @@
                     //multiple: true,
                     done: function(res){
                         //上传完毕回调
-						if (res.code==1){
+						if (res.code==0){
 						    var temp = $("#imgPath").val();
 							$("#imgPath").val(temp+res.data.src+";");
-							alert("上传成功！！！");
+							layer.msg("上传成功！！！");
 						}
                     }
                     ,error: function(){
@@ -238,7 +242,7 @@
 
                 //监听提交
                 form.on('submit(formDemo)', function(data){
-                    layer.msg(JSON.stringify(data.field));
+                    //layer.msg(JSON.stringify(data.field));
                     $.ajax({
 						url:'/utravel/addArt.do',
 						type:"post",
@@ -247,6 +251,10 @@
 						success:function (res) {
 						    if (res.code==1){
 						        layer.msg("发表成功");
+						        setTimeout(function () {
+                                    window.location.reload();
+                                },1000)
+
 							} else{
 						        layer.msg(res.info);
 							}
@@ -257,6 +265,24 @@
 
                     return false;
                 });
+
+                layedit.set({
+                    uploadImage: {
+                        url: '/utravel/addImg.do' //接口url
+                        ,type: 'post' //默认post
+						/*,success:function (res) {
+							if (res.code==0){
+                                var temp = $("#contents").val();
+                                $("#contents").val(temp+res.data.src+";");
+                                alert("上传成功！！！");
+							}
+                        }*/
+                    }
+                });
+
+				var editIndex = layedit.build('contents',{
+
+				});
 
 
             });

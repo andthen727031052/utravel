@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.utravel.dao.ImgMapper">
-  <resultMap id="BaseResultMap" type="com.utravel.domain.Img">
+  <resultMap id="imgMapper" type="com.utravel.domain.Img">
     <id column="imgid" jdbcType="INTEGER" property="imgid" />
     <result column="imgurl" jdbcType="VARCHAR" property="imgurl" />
     <result column="tname" jdbcType="VARCHAR" property="tname" />
@@ -9,14 +9,14 @@
   <sql id="Base_Column_List">
     imgid, imgurl, tname
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="imgMapper">
     select 
     <include refid="Base_Column_List" />
     from t_img
     where imgid = #{imgid,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByTitle" parameterType="string" resultMap="BaseResultMap">
+  <select id="selectByTitle" parameterType="string" resultType="com.utravel.domain.Img">
     select <include refid="Base_Column_List" />
     from t_img
     where tname = #{title}

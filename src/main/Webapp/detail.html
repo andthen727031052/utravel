@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>游记详情</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="layui/css/layui.css" />
+    <script type="application/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="application/javascript" src="js/bootstrap.js"></script>
+    <script type="application/javascript" src="layui/layui.js"></script>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+        .dhl {
+            margin-top: 20px;
+        }
+        span {
+            margin-left: 30px;
+        }
+        a:hover {
+            background-color:greenyellow;
+        }
+        p {
+            border: 0px solid #ccc;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+
+        dd {
+            width: 120px;
+            height: 35px;
+        }
+        .row{
+            margin-top: 15px;
+        }
+        img{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" >
+
+    <div class="row" style="margin-top: 10px; align-items: center;">
+
+        <div class="col-lg-2" >
+            <a href="index.html"><img style="width: 120px; height: 60px;" src="images/1550844969(1).jpg"/></a>
+        </div>
+        <div class="col-lg-5 " style="float: left; font-size: large" >
+
+            <div class="dhl">
+
+                <span><a href="index.html">首页</a></span><span><a>目的地</a></span><span><a>旅游攻略</a></span><span><a>结伴</a></span><span><a>APP</a></span>
+            </div>
+        </div>
+        <div class="col-lg-2">
+
+            <div class="input-group" style="margin-top: 17px;">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+			        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+			      </span>
+            </div><!-- /input-group -->
+        </div>
+
+        <div class="col-lg-3" style="float: right; font-size: large;width: 220px;" >
+
+            <ul class="layui-nav layui-bg-green" lay-filter="">
+
+                <li class="layui-nav-item"><a href="">消息</a>
+                    <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                        <dd><a href="">私信</a></dd>
+                        <dd><a href="">小组消息</a></dd>
+                        <dd><a href="">系统通知</a></dd>
+                        <dd><a href="">问答消息</a></dd>
+                        <dd><a href="">回复消息</a></dd>
+                        <dd><a href="">好友动态</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a href=";">我的</a>
+                    <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                        <dd><a href="userinfo.html">个人中心</a></dd>
+                        <dd><a href="write.html">写游记</a></dd>
+                        <dd><a href="userinfo.html">设置</a></dd>
+                        <dd><a href="login.html">退出</a></dd>
+                    </dl>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" id="detail">
+    <div class="row" >
+        <div class="col-lg-12" v-for="(head, index) in det.imgList" v-if="index<1" style="position: relative" >
+            <img :src="head.imgurl" style="width: 100%;height: 555px"/>
+            <div style="position:absolute; z-index:2; left:30%; top:80%">
+                <span style="font-size: 30px; font: '黑体';font-weight: bold;color: white">{{det.title}}</span>
+                <span style="font: '黑体';font-size: 20px;color: white">{{det.clicknumber}}</span>
+                <i class="layui-icon layui-icon-praise" style="font-size: 25px; color: #FFB800"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" >
+
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-10" style="size: 50px">
+                    <span>
+                        <i class="layui-icon layui-icon-username" style="font-size: 30px; color: #1E9FFF;"></i>
+                    </span>
+                    <span style="font-size: 20px;color: #FFB800">{{det.uname}}</span>
+                    <span>
+                        <i class="layui-icon layui-icon-date" style="font-size: 30px; color: #1E9FFF;"></i>
+                    </span>
+                    <span  style="font-size: 20px">{{det.deploytime}}</span>
+                </div>
+                <div class="col-lg-1">
+                    <div><i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #1E9FFF;"></i>  </div>
+                    <div>收藏</div>
+                </div>
+                <div class="col-lg-1">
+                    <div><i class="layui-icon layui-icon-login-weibo" style="font-size: 30px; color: #1E9FFF;"></i></div>
+                    <div>分享</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="row" ></div>
+                    <div class="row" v-for="(head, index) in det.imgList" v-if="index>0">
+                        <img :src="head.imgurl" style="width: 80%"/>
+                    </div>
+
+                    <div class="row" id="testContents" style="font: '微软雅黑';">
+                        <pre style="font-size: 18px;width: 90%;border: hidden;">
+                            {{det.contents}}
+                        </pre>
+
+
+                    </div>
+                    <!--<p style="font-size: 18px;font: '楷体';width: 90%">
+                        {{det.contents}}
+                    </p>-->
+                </div>
+                <div class="col-lg-2">
+                    <div class="row">
+                        <div>相关目的地</div>
+                        <img src="images/1551411124(1).jpg">
+                    </div>
+                    <div class="row">
+                        <div>相关攻略</div>
+                        <img src="images/1551411155(1).jpg">
+                    </div>
+                    <div class="row">
+                        <div>相关游记</div>
+                        <img src="images/1551411067(1).jpg">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var vue = new Vue({
+        el:"#detail",
+        data:{
+            det:null,
+        }
+    })
+
+
+    $(function () {
+        $.ajax({
+            type:"get",
+            url:"/utravel/artDetail.do"+window.location.search,
+            dataType:"json",
+            success:function(res){
+                if(res.code==1){
+                   var tem = res.info;
+
+                    tem.contents = replaceTextarea2(tem.contents);
+                    vue.det = tem;
+
+
+                   //$("#testContents").val(tem.contents);
+                }
+            }
+
+        })
+    })
+
+    function replaceTextarea2(str){
+        var reg=new RegExp("<br>","g");
+        var reg1=new RegExp("<p>","g");
+
+        str = str.replace(reg,"\r\n");
+        str = str.replace(reg1," ");
+
+        return str;
+    }
+</script>
+
+</body>
+</html>

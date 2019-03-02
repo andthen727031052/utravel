@@ -165,8 +165,8 @@
 		<div class="col-lg-8" >
 			<ul class="layui-nav layui-bg-green" lay-filter="timeList" style="align-content: center;">
 				<li class="layui-nav-item"><a href="" style="margin-left: 30px">旅行家专栏</a></li>
-				<li class="layui-nav-item layui-this"><a href="index.html" style="margin-left: 30px">热门游记</a></li>
-				<li class="layui-nav-item"  style="margin-left: 30px" ><a href="newIndex.html">最新发表</a></li>
+				<li class="layui-nav-item "><a href="index.html" style="margin-left: 30px">热门游记</a></li>
+				<li class="layui-nav-item layui-this"  style="margin-left: 30px" ><a href="newIndex.html">最新发表</a></li>
 
 			</ul>
 		</div>
@@ -249,18 +249,17 @@
 	var layer;
 	var laypage;
     $(function () {
-        getList2(1);
+        getTimeList(1);
         getUser();
     })
 
 
 
-    layui.use(['carousel','layer','form','element','laypage'], function(){
+    layui.use(['carousel','form','element','laypage'], function(){
   var carousel = layui.carousel;
   var form = layui.form;
    var element = layui.element;
    laypage = layui.laypage;
-   layer = layui.layer;
   //建造实例
   //轮播图
   carousel.render({
@@ -285,13 +284,13 @@
 				vue.infos = null;
 
                //do something
-               getList2(currentPage);
+           getTimeList(currentPage);
 
 
        }
    });
 
-        element.on('nav(timeList)', function(elem){
+        /*element.on('nav(timeList)', function(elem){
            // console.log(elem.text); //得到当前点击的DOM对象
 			//alert(elem.text());
             $.ajax({
@@ -308,7 +307,7 @@
                 }
             })
 
-        });
+        });*/
 
 
   //监听提交
@@ -397,6 +396,21 @@
         })
     }
 
+    function getTimeList(pageIndex){
+        $.ajax({
+
+            type:"post",
+            url:"/utravel/timeList.do?page="+pageIndex,
+            dataType:"json",
+            async: false,
+            success:function (res) {
+                if (res.code==1){
+                    totalCount=res.info.total;
+                    vue.infos = res.info.rows;
+                }
+            }
+        })
+	}
 
 
 </script>
@@ -412,16 +426,15 @@
             dataType:"json",
             success:function (data) {
                 if (data.code==1) {
-                    if (data.info!=null){
+                    if (data.info==null){
+                        $("#userStatus").html('<span ><a href="login.html">登录</a></span><span><a href="register.html">注册</a></span>');
+                    }/*else{
                         setTimeout(function(){
                             layer.msg("欢迎"+data.info.uname+"访问本站");
-                        },600);
-
-
-                    }
+						},600);
+                    }*/
                 }else{
-                    $("#userStatus").html('<span ><a href="login.html">登录</a></span><span ><a href="register.html">注册</a></span>');
-
+                    alert(data.info);
                 }
             }
         })

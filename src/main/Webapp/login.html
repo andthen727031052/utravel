@@ -68,6 +68,16 @@
 			  });
 			});
 
+			$(function () {
+                $.ajax({
+                    type:"get",
+                    url:"/utravel/user/quit.do",
+                    dataType:"json",
+                    success:function (res) {
+                        //alert(res.info);
+                    }
+                })
+            })
 
 		</script>
 	</body>

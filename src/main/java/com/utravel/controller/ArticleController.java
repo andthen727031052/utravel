@@ -5,6 +5,7 @@ import com.utravel.domain.Article;
 import com.utravel.domain.User;
 import com.utravel.service.ArticleService;
 import com.utravel.util.JsonUtils;
+import com.utravel.vo.VArticle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,10 +35,12 @@ public class ArticleController {
     }
 
     @RequestMapping("/artList.do")
-    public JsonBean showAll(int page, String info){
+    public JsonBean showAll(int page, String keyword){
         JsonBean bean = null;
+
         try {
-            Map<String, Object> map = articleService.findAllByPageAndInfo(page, info);
+            Map<String, Object> map = articleService.findAllByPageAndInfo(page, keyword);
+
             bean = JsonUtils.createJsonBean(1,map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,4 +48,61 @@ public class ArticleController {
         }
         return bean;
     }
+
+    @RequestMapping("/artList2.do")
+    public JsonBean showAllByPage(int page){
+        JsonBean bean = null;
+
+        try {
+            Map<String, Object> map = articleService.findAllByPageAndSize(page,5);
+
+            bean = JsonUtils.createJsonBean(1,map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            bean = JsonUtils.createJsonBean(0,e.getMessage());
+        }
+        return bean;
+    }
+
+    @RequestMapping("/timeList.do")
+    public JsonBean showAllByDate(Integer page){
+        JsonBean bean = null;
+
+        try {
+            Map<String, Object> map = articleService.findAllNewDate(page);
+
+            bean = JsonUtils.createJsonBean(1,map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            bean = JsonUtils.createJsonBean(0,e.getMessage());
+        }
+        return bean;
+    }
+
+    @RequestMapping("/addClick.do")
+    public JsonBean addClick(Integer aid){
+        JsonBean bean = null;
+        try {
+            int clickNum = articleService.updateClickNum(aid);
+            bean = JsonUtils.createJsonBean(1,clickNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+            bean = JsonUtils.createJsonBean(0,e.getMessage());
+        }
+        return bean;
+    }
+
+    @RequestMapping("/artDetail.do")
+    public JsonBean findArtById(Integer aid){
+        JsonBean bean = null;
+        try {
+            VArticle vArticle = articleService.findByAid(aid);
+            bean = JsonUtils.createJsonBean(1,vArticle);
+        } catch (Exception e) {
+            e.printStackTrace();
+            bean = JsonUtils.createJsonBean(0,e.getMessage());
+        }
+        return bean;
+    }
+
 }

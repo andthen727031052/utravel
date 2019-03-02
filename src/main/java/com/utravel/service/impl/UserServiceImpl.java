@@ -28,4 +28,24 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public void refister(User user) {
+        User user1 = userDao.selectByName(user.getUname());
+        if (user1!=null){
+            throw new RuntimeException("用户名已存在");
+        } else {
+            userDao.insertSelective(user);
+        }
+    }
+
+    @Override
+    public void updateUser(User user) {
+        User user1 = userDao.selectByName(user.getUname());
+        if ((user1!=null)&& (user1.getUid()!=user.getUid())){
+            throw new RuntimeException("该名号不可用");
+        }else {
+            userDao.updateByPrimaryKeySelective(user);
+        }
+    }
+
 }

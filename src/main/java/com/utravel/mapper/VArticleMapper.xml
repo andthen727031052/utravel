@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.utravel.dao.VArticleMapper">
+    <resultMap id="vart" type="com.utravel.vo.VArticle" >
+
+        <id column="aid" jdbcType="INTEGER" property="aid" />
+
+        <result column="uname" jdbcType="VARCHAR" property="uname" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="place" jdbcType="VARCHAR" property="place" />
+        <result column="deploytime" jdbcType="VARCHAR" property="deploytime" />
+        <result column="contents" jdbcType="VARCHAR" property="contents" />
+        <result column="clicknumber" jdbcType="INTEGER" property="clicknumber" />
+        <collection  property="imgList"
+
+                     ofType="com.utravel.domain.Img"
+                     resultMap="com.utravel.dao.ImgMapper.imgMapper"
+        >
+        </collection>
+
+    </resultMap>
+
+
+
+<!--！！！！！collection中不用写jdbcType -->
+    <select id="selectAllByInfo" parameterType="java.lang.String" resultMap="vart">
+    select u.uname,a.*,i.* from t_article a
+    left JOIN t_img i
+    on i.tname = a.title
+    inner join t_user u
+    on u.uid = a.uid
+    where 1=1
+        <if test="keyword==null">
+            and 2=2
+        </if>
+
+     <if test="keyword!=null">
+         and a.title like "%"#{keyword}"%" or a.place like "%"#{keyword}"%" or a.contents like "%"#{keyword}"%"
+     </if>
+      order by a.clicknumber desc
+  </select>
+
+    <select id="selectAllByTimeDown"  resultMap="vart">
+       select u.uname,a.*,i.* from t_article a
+        left JOIN t_img i
+        on i.tname = a.title
+        inner join t_user u
+        on u.uid = a.uid
+        order by a.deploytime+0 desc
+
+
+
+    </select>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="vart">
+        select u.uname,a.*,i.* from t_article a
+        left JOIN t_img i
+        on i.tname = a.title
+        inner join t_user u
+        on u.uid = a.uid
+        where a.aid = #{aid}
+    </select>
+
+<select id="selectAllByPageAndSize" resultMap="vart">
+    select u.uname,a.*,i.* from t_article a
+    left JOIN t_img i
+    on i.tname = a.title
+    inner join t_user u
+    on u.uid = a.uid
+    order by a.clicknumber desc
+    limit #{page}, #{size}
+</select>
+
+    <select id="selectAll" resultMap="vart">
+        select u.uname,a.*,i.* from t_article a
+        left JOIN t_img i
+        on i.tname = a.title
+        inner join t_user u
+        on u.uid = a.uid
+        order by a.clicknumber desc
+    </select>
+
+
+    <select id="selectAllBYDate" resultMap="vart">
+        select u.uname,a.*,i.* from t_article a
+        left JOIN t_img i
+        on i.tname = a.title
+        inner join t_user u
+        on u.uid = a.uid
+        order by a.deploytime+0 desc
+    </select>
+
+</mapper>

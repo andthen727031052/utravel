@@ -1,13 +1,14 @@
 package com.utravel.vo;
 
 import com.utravel.domain.Img;
+import com.utravel.domain.User;
 
 import java.util.List;
 
 public class VArticle {
     private Integer aid;
 
-    private String uname;
+    private String  uname;
 
     private String title;
 
@@ -21,13 +22,6 @@ public class VArticle {
 
     private List<Img> imgList;
 
-    public String getUname() {
-        return uname;
-    }
-
-    public void setUname(String uname) {
-        this.uname = uname;
-    }
 
     public Integer getAid() {
         return aid;
@@ -75,6 +69,14 @@ public class VArticle {
 
     public void setClicknumber(Integer clicknumber) {
         this.clicknumber = clicknumber;
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
     public List<Img> getImgList() {

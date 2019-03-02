@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.utravel.dao.ClickMapper">
+  <resultMap id="BaseResultMap" type="com.utravel.domain.Click">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="createdate" jdbcType="VARCHAR" property="createdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cid, aid, uid, createdate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_click
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByClick" parameterType="com.utravel.domain.Click" resultMap="BaseResultMap">
+    select *
+    from t_click
+    <where>
+      <if test="cid!=null">
+       and cid = #{cid}
+      </if>
+      <if test="aid!=null">
+        and aid = #{aid}
+      </if>
+      <if test="uid!=null">
+        and uid = #{uid}
+      </if>
+      <if test="createdate!=null">
+        and createdate = #{createdate}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_click
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.utravel.domain.Click">
+    insert into t_click (cid, aid, uid, 
+      createdate)
+    values (#{cid,jdbcType=INTEGER}, #{aid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+      #{createdate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.utravel.domain.Click">
+    insert into t_click
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="aid != null">
+        aid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="aid != null">
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.utravel.domain.Click">
+    update t_click
+    <set>
+      <if test="aid != null">
+        aid = #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.utravel.domain.Click">
+    update t_click
+    set aid = #{aid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=VARCHAR}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+</mapper>

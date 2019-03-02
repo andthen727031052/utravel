@@ -73,10 +73,10 @@ public class ImgController {
         }
         Map<String,Object> map2=new HashMap<>();
         Map<String,Object> map=new HashMap<>();
-        map.put("code",1);
+        map.put("code",0);
         map.put("msg","");
         map.put("data",map2);
-        map2.put("src",dateStr+file.getOriginalFilename());
+        map2.put("src","http://10.8.156.63:8080/ut/" + dateStr+file.getOriginalFilename());
 
         //bean = JsonUtils.createJsonBean(1,map);
         return map;
